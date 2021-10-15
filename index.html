@@ -1,16 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Carriles bici</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>ArcGIS API for JavaScript Tutorials: Display a map</title>
     <link rel="stylesheet" href="https://js.arcgis.com/4.19/esri/themes/light/main.css">
     <script src="https://js.arcgis.com/4.19/"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    
+    <link rel="stylesheet" href="https://js.arcgis.com/4.21/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.21/"></script>
+    <script>
+        require(["esri/config",
+            "esri/WebMap",
+            "esri/views/MapView",
+            "esri/widgets/ScaleBar",
+            "esri/widgets/Legend"
+        ], function (esriConfig, WebMap, MapView, ScaleBar, Legend) {
+        esriConfig.apiKey = "AAPK0e3c333f169045b19b7b91fa884230aa41lcAncaHZKHdLjkN2uPGHFGI3c_1h0TozCWLwsanF1PkP9Dq8KOgVDamwTOCciS";
+
+        const webmap = new WebMap({
+            portalItem: {
+                id: "41281c51f9de45edaf1c8ed44bb10e30"
+            }
+        });
+
+        const view = new MapView({
+            map: webmap,
+            container: "viewDiv" // Div element
+        });
+
+        const scalebar = new ScaleBar({
+            view: view
+        });
+        view.ui.add(scalebar, "bottom-left");
+
+        const legend = new Legend ({
+            view: view
+        });
+        view.ui.add(legend, "top-right");
+      });
+    </script>
   </head>
   
   <body>
-    <h1>Carriles bici en Madrid</h1>
+    <div id="viewDiv"></div>
+    <!--<h1>Carriles bici en Madrid</h1>
     <div id="map"></div>
-    <script type="module" src="map.js"></script>
+    <script type="module" src="map.js"></script>-->
   </body>
 
 </html>
